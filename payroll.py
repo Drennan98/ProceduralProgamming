@@ -34,4 +34,15 @@ def get_employee_details():
 
     return employee_id, employee_name, hours_worked, hourly_rate
 
-get_employee_details()
+def calculate_gross_pay(hours_worked, hourly_rate):
+    """
+    Calculate gross pay based on hours worked and hourly rate.
+    """
+    if hours_worked > STANDARD_HOURS:
+        overtime_hours = hours_worked - STANDARD_HOURS
+        regular_pay = STANDARD_HOURS * hourly_rate
+        overtime_pay = overtime_hours * hourly_rate * OVERTIME_RATE
+        gross_pay = regular_pay + overtime_pay
+    else:
+        gross_pay = hours_worked * hourly_rate
+    return gross_pay
