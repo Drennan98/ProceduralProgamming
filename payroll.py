@@ -153,58 +153,59 @@ def main():
                 print("Number of employees must be greater than zero.")
             else:
                 break
+
         except ValueError:
             print("Please enter a valid whole number for employees.")
 
-        total_gross_pay = 0
-        total_net_pay = 0
+    total_gross_pay = 0
+    total_net_pay = 0
 
-        for employee in range(number_of_employees):
-            print (f"\nEmployee {employee + 1}")
-            employee_id, employee_name, hours_worked, hourly_rate = \
-                get_employee_details()
+    for employee in range(number_of_employees):
+        print (f"\nEmployee {employee + 1}")
+        employee_id, employee_name, hours_worked, hourly_rate = \
+            get_employee_details()
             
-            gross_pay = calculate_gross_pay(
-                hours_worked, 
-                hourly_rate
-            )
+        gross_pay = calculate_gross_pay(
+            hours_worked, 
+            hourly_rate
+        )
 
-            tax = calculate_tax(gross_pay)
-            pension = calculate_pension(gross_pay)
+        tax = calculate_tax(gross_pay)
+        pension = calculate_pension(gross_pay)
 
-            net_pay = calculate_net_pay(
-                gross_pay,
-                tax,
-                pension
-            )
+        net_pay = calculate_net_pay(
+            gross_pay,
+            tax,
+            pension
+        )
 
-            display_payslip(
-                employee_id,
-                employee_name,
-                hours_worked,
-                hourly_rate,
-                gross_pay,
-                tax,
-                pension,
-                net_pay
-            )
+        display_payslip(
+            employee_id,
+            employee_name,
+            hours_worked,
+            hourly_rate,
+            gross_pay,
+            tax,
+            pension,
+            net_pay
+        )
 
-            save_payslip(
-                employee_id,
-                employee_name,
-                gross_pay,
-                tax,
-                pension,
-                net_pay 
-            )
+        save_payslip(
+            employee_id,
+            employee_name,
+            gross_pay,
+            tax,
+            pension,
+            net_pay 
+        )
 
-            total_gross_pay += gross_pay
-            total_net_pay += net_pay
+        total_gross_pay += gross_pay
+        total_net_pay += net_pay
 
-        display_summary(
-            total_gross_pay,
-            total_net_pay,
-            number_of_employees
+    display_summary(
+        total_gross_pay,
+        total_net_pay,
+        number_of_employees
         )
 
 
