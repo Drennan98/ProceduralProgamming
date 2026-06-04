@@ -102,7 +102,7 @@ def save_payslip(employee_id, employee_name,
     Writing payroll information to txt file.
     """
 
-    with open("payslip.txt", "w") as file:
+    with open("payslip.txt", "a") as file:
         file.write("\n")
         file.write("=" * 40 + "\n")
         file.write("PAYSLIP\n")
@@ -160,6 +160,7 @@ def main():
     total_gross_pay = 0
     total_net_pay = 0
 
+    # Hit enter to reduce the line size to adhere to PEP8 standards. 
     for employee in range(number_of_employees):
         print (f"\nEmployee {employee + 1}")
         employee_id, employee_name, hours_worked, hourly_rate = \
