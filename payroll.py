@@ -34,6 +34,7 @@ def get_employee_details():
 
     return employee_id, employee_name, hours_worked, hourly_rate
 
+
 def calculate_gross_pay(hours_worked, hourly_rate):
     """
     Calculate gross pay based on hours worked and hourly rate.
@@ -47,11 +48,13 @@ def calculate_gross_pay(hours_worked, hourly_rate):
         gross_pay = hours_worked * hourly_rate
     return gross_pay
 
+
 def calculate_tax(gross_pay):
     """
     Calculate tax based on gross pay.
     """
     return gross_pay * TAX_RATE
+
 
 def calculate_pension(gross_pay):
     """
@@ -59,11 +62,13 @@ def calculate_pension(gross_pay):
     """
     return gross_pay * PENSION
 
+
 def calculate_net_pay(gross_pay, tax, pension):
     """
     Calculate the net pay after deducting tax and pension from gross pay.
     """
     return gross_pay - tax - pension
+
 
 def display_payslip(employee_id, employee_name,
                     hours_worked, hourly_rate,
@@ -88,6 +93,120 @@ def display_payslip(employee_id, employee_name,
      print(f"Tax Deduction: €{tax:.2f}")
      print(f"Pension Contribution: €{pension:.2f}")
      print(f"Net Pay: €{net_pay:.2f}")
+
+
+def save_payslip(employee_id, employee_name,
+                 gross_pay, tax,
+                 pension, net_pay):
+    """
+    Writing payroll information to txt file.
+    """
+
+    with open("payslip.txt", "w") as file:
+        file.write("\n")
+        file.write("=" * 40 + "\n")
+        file.write("PAYSLIP\n")
+        file.write("=" * 40 + "\n")
+
+        file.write(f"Employee ID: {employee_id}\n")
+        file.write(f"Employee Name: {employee_name}\n")
+        
+        file.write(f"Gross Pay: €{gross_pay:.2f}\n")
+        file.write(f"Tax Deduction: €{tax:.2f}\n")
+        file.write(f"Pension Contribution: €{pension:.2f}\n")
+        file.write(f"Net Pay: €{net_pay:.2f}\n")
+
+        file.write(f"=" * 40 + "\n")
+
+
+def display_summary(total_gross_pay,
+                    total_net_pay,
+                    number_of_employees):
+    """
+    Displays the total number of employees processed, total gross pay, and total net pay.
+    """
+
+    average_net_pay = total_net_pay / number_of_employees
+
+    print("\n")
+    print("=" * 40)
+    print("Payroll Summary")
+    print("=" * 40)
+
+    print(f"Employees Processed: {number_of_employees}")
+    print(f"Total Gross Pay: €{total_gross_pay:.2f}")
+    print(f"Total Net Pay: €{total_net_pay:.2f}")
+    print(f"Average Net Pay: €{average_net_pay:.2f}")
+
+    print("=" * 40)
+
+def main():
+
+    print("Payroll Processing System")
+
+    while True:
+        try:
+            number_of_employees = int(
+                input("Enter the number of employees to process: "))
+            
+            if number_of_employees <= 0:
+                print("Number of employees must be greater than zero.")
+            else:
+                break
+        except ValueError:
+            print("Please enter a valid whole number for employees.")
+
+        total_gross_pay = 0
+        total_net_pay = 0
+
+        for employee in range(number_of_employees):
+            print (f"\nEmployee {employee + 1}")
+            employee_id, employee_name, hours_worked, hourly_rate = \
+                get_employee_details()
+            
+            gross_pay = calculate_gross_pay(
+                hours_worked, 
+                hourly_rate
+            )
+
+            tax = calculate_tax(gross_pay)
+            pension = calculate_pension(gross_pay)
+
+            net_pay = calculate_net_pay(
+                gross_pay,
+                tax,
+                pension
+            )
+
+            display_payslip(
+                employee_id,
+                employee_name,
+                hours_worked,
+                hourly_rate,
+                gross_pay,
+                tax,
+                pension,
+                net_pay
+            )
+
+            save_payslip(
+                employee_id,
+                employee_name,
+                gross_pay,
+                tax,
+                pension,
+                net_pay 
+            )
+
+            total_gross_pay += gross_pay
+            total_net_pay += net_pay
+
+        display_summary(
+            total_gross_pay,
+            total_net_pay,
+            number_of_employees
+        )
+
 
 if __name__ == "__main__":
     main()
