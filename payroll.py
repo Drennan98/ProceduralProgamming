@@ -46,3 +46,48 @@ def calculate_gross_pay(hours_worked, hourly_rate):
     else:
         gross_pay = hours_worked * hourly_rate
     return gross_pay
+
+def calculate_tax(gross_pay):
+    """
+    Calculate tax based on gross pay.
+    """
+    return gross_pay * TAX_RATE
+
+def calculate_pension(gross_pay):
+    """
+    Calculate pension contributionss based on gross pay.
+    """
+    return gross_pay * PENSION
+
+def calculate_net_pay(gross_pay, tax, pension):
+    """
+    Calculate the net pay after deducting tax and pension from gross pay.
+    """
+    return gross_pay - tax - pension
+
+def display_payslip(employee_id, employee_name,
+                    hours_worked, hourly_rate,
+                    gross_pay, tax,
+                    pension, net_pay):
+     """
+     Function which will display employee payslip with all the details.
+     """
+
+     print("\n" + "=" * 40)
+     print("\n--- Employee Payslip ---")
+     print("=" * 40)
+
+     print(f"Employee ID: {employee_id}")
+     print(f"Employee Name: {employee_name}")
+     print(f"Hours Worked: {hours_worked:.2f}")
+     print(f"Hourly Rate: €{hourly_rate:.2f}")
+
+     print("-" * 40)
+
+     print(f"Gross Pay: €{gross_pay:.2f}")
+     print(f"Tax Deduction: €{tax:.2f}")
+     print(f"Pension Contribution: €{pension:.2f}")
+     print(f"Net Pay: €{net_pay:.2f}")
+
+if __name__ == "__main__":
+    main()
