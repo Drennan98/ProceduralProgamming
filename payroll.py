@@ -142,7 +142,7 @@ def display_summary(total_gross_pay,
 
 def main():
 
-    print("Payroll Processing System")
+    print("Golf Shop Payroll Processing System")
 
     while True:
         try:
