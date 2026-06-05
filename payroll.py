@@ -105,7 +105,7 @@ def save_payslip(employee_id, employee_name,
     with open("payslip.txt", "a") as file:
         file.write("\n")
         file.write("=" * 40 + "\n")
-        file.write("PAYSLIP\n")
+        file.write("GOLF SHOP PAYSLIP\n")
         file.write("=" * 40 + "\n")
 
         file.write(f"Employee ID: {employee_id}\n")
@@ -130,7 +130,7 @@ def display_summary(total_gross_pay,
 
     print("\n")
     print("=" * 40)
-    print("Payroll Summary")
+    print("Golf Shop Payroll Summary")
     print("=" * 40)
 
     print(f"Employees Processed: {number_of_employees}")
@@ -162,7 +162,9 @@ def main():
 
     # Hit enter to reduce the line size to adhere to PEP8 standards. 
     for employee in range(number_of_employees):
+        
         print (f"\nEmployee {employee + 1}")
+        
         employee_id, employee_name, hours_worked, hourly_rate = \
             get_employee_details()
             
@@ -171,6 +173,7 @@ def main():
             hourly_rate
         )
 
+        # Function calls to calculate tax and pension contributions based on gross pay.
         tax = calculate_tax(gross_pay)
         pension = calculate_pension(gross_pay)
 
